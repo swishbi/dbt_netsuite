@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "dbt-netsuite"
+version = "0.1.0"
+description = ""
+authors = ["Evan Phillips <evan@swishbi.com>"]
+readme = "README.md"
+packages = [{include = "dbt_netsuite"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+dbt-databricks = "^1.4.2"
+dbt-core = "^1.4.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
