@@ -1,3 +1,5 @@
+{{ config(enabled=(var('netsuite__using_jobs', false) and var('netsuite__advanced_jobs_enabled') and var('netsuite__time_tracking_enabled', false))) }}
+
 with customers as (
     select * from {{ ref('base_netsuite__customers') }}
 ),

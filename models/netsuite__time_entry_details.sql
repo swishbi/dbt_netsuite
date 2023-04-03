@@ -1,3 +1,5 @@
+{{ config(enabled=(var('netsuite__time_tracking_enabled', false))) }}
+
 with time_entries as (
     select * from {{ var('netsuite_time_entries') }}
 ),

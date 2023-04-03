@@ -1,3 +1,5 @@
+{{ config(enabled=(var('netsuite__using_budgets', false))) }}
+
 with budgets_with_converted_amounts as (
     select * from {{ ref("int_netsuite__budgets_with_converted_amounts") }}
 ),

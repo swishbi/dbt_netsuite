@@ -1,3 +1,5 @@
+{{ config(enabled=(var('netsuite__time_off_management_enabled', false))) }}
+
 with dim_date as (
     select * from {{ ref('dim_date') }}
 ),

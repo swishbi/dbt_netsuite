@@ -1,3 +1,5 @@
+{{ config(enabled=(var('netsuite__using_budgets', false))) }}
+
 with budgets_w_accounting_period as (
     select * from {{ ref('int_netsuite__budgets_w_accounting_period') }}
 ), 

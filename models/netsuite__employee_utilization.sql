@@ -1,3 +1,5 @@
+{{ config(enabled=(var('netsuite__time_tracking_enabled', false))) }}
+
 with employees as (
     select * from {{ ref('base_netsuite__employees') }}
 ),
