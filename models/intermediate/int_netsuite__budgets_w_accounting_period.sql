@@ -2,7 +2,7 @@ with budgets as (
     select * from {{ ref('base_netsuite__budgets') }}
 ),
 budgets_machine as (
-    select * from {{ ref('stg_netsuite__budgets_machine') }}
+    select * from {{ var('netsuite_budgets_machine') }}
 ),
 budgets_w_accounting_period as (
     

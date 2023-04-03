@@ -2,7 +2,7 @@ with dim_date as (
     select * from {{ ref('dim_date') }}
 ),
 time_entries as (
-    select * from {{ ref('stg_netsuite__time_entries') }}
+    select * from {{ var('netsuite_time_entries') }}
 ),
 employee_time_entries_by_day as (
 

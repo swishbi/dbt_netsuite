@@ -11,13 +11,13 @@ jobs as (
     select * from {{ ref('base_netsuite__jobs') }}
 ),
 job_resources as (
-    select * from {{ ref('stg_netsuite__job_resources') }}
+    select * from {{ var('netsuite_job_resources') }}
 ),
 project_tasks as (
-    select * from {{ ref('stg_netsuite__project_tasks') }}
+    select * from {{ var('netsuite_project_tasks') }}
 ),
 project_task_assignees as (
-    select * from {{ ref('stg_netsuite__project_task_assignees') }}
+    select * from {{ var('netsuite_project_task_assignees') }}
 ),
 actual_work as (
     
@@ -28,7 +28,7 @@ actual_work as (
         sum(hours) as hours,
         sum(case when is_billable then hours else 0 end) as billable_hours
     
-    from {{ ref('stg_netsuite__time_entries') }}
+    from {{ var('netsuite_time_entries') }}
     
     where lower(time_type) = 'a'
     

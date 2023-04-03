@@ -8,7 +8,7 @@ accounting_periods as (
     select * from {{ ref('base_netsuite__accounting_periods') }}
 ),
 subsidiaries as (
-    select * from {{ ref('stg_netsuite__subsidiaries') }}
+    select * from {{ var('netsuite_subsidiaries') }}
 ),
 transaction_lines as (
     select * from {{ ref('base_netsuite__transaction_lines') }}
@@ -38,13 +38,13 @@ vendors as (
     select * from {{ ref('base_netsuite__vendors') }}
 ),
 departments as (
-    select * from {{ ref('stg_netsuite__departments') }}
+    select * from {{ var('netsuite_departments') }}
 ),
 currencies as (
-    select * from {{ ref('stg_netsuite__currencies') }}
+    select * from {{ var('netsuite_currencies') }}
 ),
 classes as (
-    select * from {{ ref('stg_netsuite__classes') }}
+    select * from {{ var('netsuite_classes') }}
 ),
 transaction_details as (
     select

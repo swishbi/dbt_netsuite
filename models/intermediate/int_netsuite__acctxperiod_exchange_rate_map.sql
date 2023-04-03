@@ -2,10 +2,10 @@ with accounts as (
     select * from {{ ref('base_netsuite__accounts') }}
 ),
 accounting_books as (
-    select * from {{ ref('stg_netsuite__accounting_books') }}
+    select * from {{ var('netsuite_accounting_books') }}
 ),
 subsidiaries as (
-    select * from {{ ref('stg_netsuite__subsidiaries') }}
+    select * from {{ var('netsuite_subsidiaries') }}
 ),
 consolidated_exchange_rates as (
     select * from {{ ref('base_netsuite__consolidated_exchange_rates') }}

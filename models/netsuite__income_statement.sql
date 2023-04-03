@@ -8,19 +8,19 @@ accounting_periods as (
     select * from {{ ref('base_netsuite__accounting_periods') }}
 ),
 subsidiaries as (
-    select * from {{ ref('stg_netsuite__subsidiaries') }}
+    select * from {{ var('netsuite_subsidiaries') }}
 ),
 transaction_lines as (
     select * from {{ ref('base_netsuite__transaction_lines') }}
 ),
 classes as (
-    select * from {{ ref('stg_netsuite__classes') }}
+    select * from {{ var('netsuite_classes') }}
 ),
 locations as (
-    select * from {{ ref('stg_netsuite__locations') }}
+    select * from {{ var('netsuite_locations') }}
 ),
 departments as (
-    select * from {{ ref('stg_netsuite__departments') }}
+    select * from {{ var('netsuite_departments') }}
 ),
 income_statement as (
 

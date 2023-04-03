@@ -8,7 +8,7 @@ accounting_periods as (
     select * from {{ ref('base_netsuite__accounting_periods') }}
 ), 
 subsidiaries as (
-    select * from {{ ref('stg_netsuite__subsidiaries') }}
+    select * from {{ var('netsuite_subsidiaries') }}
 ),
 balance_sheet as (
 

@@ -1,14 +1,14 @@
 with time_entries as (
-    select * from {{ ref('stg_netsuite__time_entries') }}
+    select * from {{ var('netsuite_time_entries') }}
 ),
 classes as (
-    select * from {{ ref('stg_netsuite__classes') }}
+    select * from {{ var('netsuite_classes') }}
 ),
 customers as (
     select * from {{ ref('base_netsuite__customers') }}
 ),
 departments as (
-    select * from {{ ref('stg_netsuite__departments') }}
+    select * from {{ var('netsuite_departments') }}
 ),
 employees as (
     select * from {{ ref('base_netsuite__employees') }}
@@ -20,22 +20,22 @@ jobs as (
     select * from {{ ref('base_netsuite__jobs') }}
 ),
 job_resources as (
-    select * from {{ ref('stg_netsuite__job_resources') }}
+    select * from {{ var('netsuite_job_resources') }}
 ),
 locations as (
     select * from {{ ref('base_netsuite__locations') }}
 ),
 project_tasks as (
-    select * from {{ ref('stg_netsuite__project_tasks') }}
+    select * from {{ var('netsuite_project_tasks') }}
 ),
 project_task_assignees as (
-    select * from {{ ref('stg_netsuite__project_task_assignees') }}
+    select * from {{ var('netsuite_project_task_assignees') }}
 ),
 subsidiaries as (
-    select * from {{ ref('stg_netsuite__subsidiaries') }}
+    select * from {{ var('netsuite_subsidiaries') }}
 ),
 time_off_types as (
-    select * from {{ ref('stg_netsuite__time_off_types') }}
+    select * from {{ var('netsuite_time_off_types') }}
 ),
 time_entry_details as (
 

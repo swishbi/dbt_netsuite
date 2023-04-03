@@ -1,5 +1,5 @@
 with transaction_line_links as (
-    select * from {{ ref('stg_netsuite__previous_transaction_line_links') }}
+    select * from {{ var('netsuite_previous_transaction_line_links') }}
 ),
 grouped as (
     select

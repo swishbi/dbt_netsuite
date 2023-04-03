@@ -5,10 +5,10 @@ employees as (
     select * from {{ ref('base_netsuite__employees') }}
 ),
 work_calendars as (
-    select * from {{ ref('stg_netsuite__work_calendars') }}
+    select * from {{ var('netsuite_work_calendars') }}
 ),
 work_calendar_holidays as (
-    select * from {{ ref('stg_netsuite__work_calendar_holidays') }}
+    select * from {{ var('netsuite_work_calendar_holidays') }}
 ),
 employee_work_calendar_by_day as (
 
