@@ -1,7 +1,7 @@
 {{ config(enabled=(var('netsuite__multiple_currencies_enabled', false))) }}
 
 with accounts as (
-    select * from {{ ref('base_netsuite__accounts') }}
+    select * from {{ var('netsuite_accounts') }}
 ),
 {% if var('netsuite__multibook_accounting_enabled', false) %}
 accounting_books as (
@@ -12,7 +12,7 @@ subsidiaries as (
     select * from {{ var('netsuite_subsidiaries') }}
 ),
 consolidated_exchange_rates as (
-    select * from {{ ref('base_netsuite__consolidated_exchange_rates') }}
+    select * from {{ var('netsuite_consolidated_exchange_rates') }}
 ),
 period_exchange_rate_map as (
     -- exchange rates used, by accounting period, to convert to parent subsidiary

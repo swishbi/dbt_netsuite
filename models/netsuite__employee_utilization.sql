@@ -1,7 +1,7 @@
 {{ config(enabled=(var('netsuite__time_tracking_enabled', false))) }}
 
 with employees as (
-    select * from {{ ref('base_netsuite__employees') }}
+    select * from {{ var('netsuite_employees') }}
 ),
 employee_work_calendar_by_day as (
     select * from {{ ref('int_netsuite__employee_work_calendar_by_day') }}
@@ -47,6 +47,6 @@ employee_utilization as (
         on employees.employee_id = employee_work_calendar_by_day.employee_id
     
     where
-        employee_work_calendar_by_day.relative_day < 0
+        employee_work_calendar_by_day.date_day < {{ dbt.date_trunc("day", dbt.current_timestamp()) }}
 )
 select * from employee_utilization

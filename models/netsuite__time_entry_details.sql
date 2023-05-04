@@ -3,42 +3,55 @@
 with time_entries as (
     select * from {{ var('netsuite_time_entries') }}
 ),
+
 classes as (
     select * from {{ var('netsuite_classes') }}
 ),
+
 customers as (
-    select * from {{ ref('base_netsuite__customers') }}
+    select * from {{ var('netsuite_customers') }}
 ),
+
 departments as (
     select * from {{ var('netsuite_departments') }}
 ),
+
 employees as (
-    select * from {{ ref('base_netsuite__employees') }}
+    select * from {{ var('netsuite_employees') }}
 ),
+
 items as (
-    select * from {{ ref('base_netsuite__items') }}
+    select * from {{ var('netsuite_items') }}
 ),
+
 jobs as (
-    select * from {{ ref('base_netsuite__jobs') }}
+    select * from {{ var('netsuite_jobs') }}
 ),
+
 job_resources as (
     select * from {{ var('netsuite_job_resources') }}
 ),
+
 locations as (
-    select * from {{ ref('base_netsuite__locations') }}
+    select * from {{ var('netsuite_locations') }}
 ),
+
 project_tasks as (
     select * from {{ var('netsuite_project_tasks') }}
 ),
+
 project_task_assignees as (
     select * from {{ var('netsuite_project_task_assignees') }}
 ),
+
 subsidiaries as (
     select * from {{ var('netsuite_subsidiaries') }}
 ),
+
 time_off_types as (
     select * from {{ var('netsuite_time_off_types') }}
 ),
+
 time_entry_details as (
 
     select
@@ -56,14 +69,18 @@ time_entry_details as (
         time_entries.rate,
         time_entries.time_type,
         time_entries.time_type_full_name
+
         --The below script allows for accounts table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='time_entries_pass_through_columns', identifier='time_entries', transform='') }},
+        
         time_entries.employee_id,
         employees.employee_name_last_first,
         employees.employee_job_title,
         employees.employee_labor_cost
+        
         --The below script allows for accounts table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='employees_pass_through_columns', identifier='employees', transform='') }},
+        
         time_entries.customer_id as customer_job_id,
         customers.customer_id,
         coalesce(customers.company_name, time_off_types.time_off_type_name) as company_name,
@@ -72,8 +89,10 @@ time_entry_details as (
         customers.customer_zip_code,
         customers.customer_country,
         customers.customer_external_id
+        
         --The below script allows for accounts table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='customers_pass_through_columns', identifier='customers', transform='') }},
+        
         jobs.job_id,
         jobs.job_external_id,
         coalesce(jobs.job_name, time_off_types.time_off_type_name) as job_name,
@@ -89,8 +108,10 @@ time_entry_details as (
         items.item_type_name,
         time_entries.department_id,
         departments.department_name
+        
         --The below script allows for accounts table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='departments_pass_through_columns', identifier='departments', transform='') }},
+        
         time_entries.subsidiary_id,
         subsidiaries.subsidiary_name,
         time_entries.location_id,
@@ -143,5 +164,6 @@ time_entry_details as (
         
     left join time_off_types 
         on time_off_types.time_off_type_id = time_entries.time_off_type_id
+        
 )
 select * from time_entry_details

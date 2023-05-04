@@ -3,33 +3,45 @@
 with budgets_with_converted_amounts as (
     select * from {{ ref("int_netsuite__budgets_with_converted_amounts") }}
 ),
+
 accounts as (
     select * from {{ ref("base_netsuite__accounts") }}
 ),
+
 accounting_periods as (
     select * from {{ ref("base_netsuite__accounting_periods") }}
 ),
+
 subsidiaries as (
-    select * from {{ ref("stg_netsuite__subsidiaries") }}
+    select * from {{ var("netsuite_subsidiaries") }}
 ),
+
 customers as (
     select * from {{ ref("base_netsuite__customers") }}
 ),
+
 items as (
     select * from {{ ref("base_netsuite__items") }}
 ),
+
 locations as (
     select * from {{ ref("base_netsuite__locations") }}
 ),
+
 departments as (
-    select * from {{ ref("stg_netsuite__departments") }}
+    select * from {{ var("netsuite_departments") }}
 ),
+
+{% if var('netsuite__multiple_currencies_enabled', false) %}
 currencies as (
-    select * from {{ ref("stg_netsuite__currencies") }}
+    select * from {{ var("netsuite_currencies") }}
 ),
+{% endif %}
+
 classes as (
-    select * from {{ ref("stg_netsuite__classes") }}
+    select * from {{ var("netsuite_classes") }}
 ),
+
 budget_details as (
     
     select
@@ -80,12 +92,12 @@ budget_details as (
         subsidiaries.subsidiary_name,
 
         case
-            when lower(accounts.account_type_name) = 'income' or lower(accounts.account_type_name) = 'other income' then - converted_amount_using_budget_accounting_period
+            when accounts.is_income_account then - converted_amount_using_budget_accounting_period
             else converted_amount_using_budget_accounting_period
         end as converted_amount,
 
         case
-            when lower(accounts.account_type_name) = 'income' or lower(accounts.account_type_name) = 'other income' then - budgets_with_converted_amounts.unconverted_amount
+            when accounts.is_income_account then - budgets_with_converted_amounts.unconverted_amount
             else budgets_with_converted_amounts.unconverted_amount
         end as unconverted_amount
 
@@ -120,8 +132,11 @@ budget_details as (
     
     left join subsidiaries 
         on subsidiaries.subsidiary_id = budgets_with_converted_amounts.subsidiary_id
+
+    {% if var('netsuite__multiple_calendars_enabled', false) %}
     where
         (accounting_periods.fiscal_calendar_id is null
         or accounting_periods.fiscal_calendar_id = (select fiscal_calendar_id from subsidiaries where parent_id is null))
+    {% endif %}
 )
 select * from budget_details

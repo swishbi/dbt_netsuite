@@ -1,16 +1,16 @@
 {{ config(enabled=(var('netsuite__using_jobs', false) and var('netsuite__advanced_jobs_enabled') and var('netsuite__time_tracking_enabled', false))) }}
 
 with customers as (
-    select * from {{ ref('base_netsuite__customers') }}
+    select * from {{ var('netsuite_customers') }}
 ),
 employees as (
-    select * from {{ ref('base_netsuite__employees') }}
+    select * from {{ var('netsuite_employees') }}
 ),
 items as (
-    select * from {{ ref('base_netsuite__items') }}
+    select * from {{ var('netsuite_items') }}
 ),
 jobs as (
-    select * from {{ ref('base_netsuite__jobs') }}
+    select * from {{ var('netsuite_jobs') }}
 ),
 job_resources as (
     select * from {{ var('netsuite_job_resources') }}

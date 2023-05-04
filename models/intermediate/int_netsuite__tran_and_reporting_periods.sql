@@ -1,5 +1,5 @@
 with accounting_periods as (
-    select * from {{ ref('base_netsuite__accounting_periods') }}
+    select * from {{ var('netsuite_accounting_periods') }}
 ),
 subsidiaries as (
     select * from {{ var('netsuite_subsidiaries') }}
@@ -15,12 +15,16 @@ transaction_and_reporting_periods as (
         on multiplier.starting_at >= base.starting_at
         and multiplier.is_quarter = base.is_quarter
         and multiplier.is_year = base.is_year -- this was year_0 in netsuite1
-        and coalesce(multiplier.fiscal_calendar_id, 1) = coalesce(base.fiscal_calendar_id, 1)
+        {% if var('netsuite__multiple_calendars_enabled', false) %}
+        and multiplier.fiscal_calendar_id = base.fiscal_calendar_id
+        {% endif %}
         and cast(multiplier.starting_at as {{ dbt.type_timestamp() }}) <= {{ current_timestamp() }} 
 
     where 
         not base.is_quarter
         and not base.is_year
-        and coalesce(base.fiscal_calendar_id, 1) = coalesce((select fiscal_calendar_id from subsidiaries where parent_id is null), 1) -- fiscal calendar will align with parent subsidiary's default calendar
+        {% if var('netsuite__multiple_calendars_enabled', false) %}
+        and base.fiscal_calendar_id = (select fiscal_calendar_id from subsidiaries where parent_id is null) -- fiscal calendar will align with parent subsidiary's default calendar
+        {% endif %}
 )
-select *  from transaction_and_reporting_periods
+select * from transaction_and_reporting_periods

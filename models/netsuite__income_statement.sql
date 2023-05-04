@@ -1,27 +1,43 @@
 with transactions_with_converted_amounts as (
     select * from {{ ref('int_netsuite__tran_with_converted_amounts') }}
 ), 
-accounts as (
-    select * from {{ ref('base_netsuite__accounts') }}
+
+--Below is only used if income statement transaction detail columns are specified dbt_project.yml file.
+{% if var('income_statement_transaction_detail_columns') != []%}
+transaction_details as (
+    select * 
+    from {{ ref('netsuite__transaction_details') }}
 ), 
+{% endif %}
+
+accounts as (
+    select * from {{ var('netsuite_accounts') }}
+), 
+
 accounting_periods as (
-    select * from {{ ref('base_netsuite__accounting_periods') }}
+    select * from {{ var('netsuite_accounting_periods') }}
 ),
+
 subsidiaries as (
     select * from {{ var('netsuite_subsidiaries') }}
 ),
+
 transaction_lines as (
-    select * from {{ ref('base_netsuite__transaction_lines') }}
+    select * from {{ var('netsuite_transaction_lines') }}
 ),
+
 classes as (
     select * from {{ var('netsuite_classes') }}
 ),
+
 locations as (
     select * from {{ var('netsuite_locations') }}
 ),
+
 departments as (
     select * from {{ var('netsuite_departments') }}
 ),
+
 income_statement as (
 
     select
@@ -37,22 +53,29 @@ income_statement as (
         accounts.account_type_name,
         accounts.account_id,
         accounts.account_number,
+        accounts.account_number_and_name,
         subsidiaries.subsidiary_id,
         subsidiaries.subsidiary_full_name,
         subsidiaries.subsidiary_name
+
         --The below script allows for accounts table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='accounts_pass_through_columns', identifier='accounts', transform='') }},
-        accounts.account_number_and_name,
+        
         transaction_lines.class_id,
         classes.class_full_name
+        
         --The below script allows for classes table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='classes_pass_through_columns', identifier='classes', transform='') }},
+        
         transaction_lines.location_id,
         locations.location_full_name,
+        
         transaction_lines.department_id,
         departments.department_full_name
+        
         --The below script allows for departments table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='departments_pass_through_columns', identifier='departments', transform='') }},
+        
         transactions_with_converted_amounts.account_category,
 
         case 
@@ -63,6 +86,11 @@ income_statement as (
             when lower(accounts.account_type_name) = 'other expense' then 5
             else null
         end as income_statement_sort_helper
+
+        --Below is only used if income statement transaction detail columns are specified dbt_project.yml file.
+        {% if var('income_statement_transaction_detail_columns') %}
+        , transaction_details.{{ var('income_statement_transaction_detail_columns') | join (", transaction_details.")}}
+        {% endif %}
 
         , -converted_amount_using_transaction_accounting_period as converted_amount
         , -unconverted_amount as unconverted_amount
@@ -91,8 +119,17 @@ income_statement as (
     left join subsidiaries
         on transactions_with_converted_amounts.subsidiary_id = subsidiaries.subsidiary_id
     
-    where coalesce(reporting_accounting_periods.fiscal_calendar_id,1) = coalesce((select fiscal_calendar_id from subsidiaries where parent_id is null),1)
-        and transactions_with_converted_amounts.transaction_accounting_period_id = transactions_with_converted_amounts.reporting_accounting_period_id
+    --Below is only used if income statement transaction detail columns are specified dbt_project.yml file.
+    {% if var('income_statement_transaction_detail_columns') != []%}
+    join transaction_details
+        on transaction_details.transaction_id = transactions_with_converted_amounts.transaction_id
+        and transaction_details.transaction_line_id = transactions_with_converted_amounts.transaction_line_id
+    {% endif %}
+    
+    where transactions_with_converted_amounts.transaction_accounting_period_id = transactions_with_converted_amounts.reporting_accounting_period_id
         and transactions_with_converted_amounts.is_income_statement
+        {% if var('netsuite__multiple_calendars_enabled', false) %}
+        and reporting_accounting_periods.fiscal_calendar_id = (select fiscal_calendar_id from subsidiaries where parent_id is null)
+        {% endif %}
 )
 select * from income_statement

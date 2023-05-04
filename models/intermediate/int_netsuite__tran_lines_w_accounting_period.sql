@@ -1,8 +1,8 @@
 with transactions as (
-    select * from {{ ref('base_netsuite__transactions') }}
+    select * from {{ var('netsuite_transactions') }}
 ),
 transaction_lines as (
-    select * from {{ ref('base_netsuite__transaction_lines') }}
+    select * from {{ var('netsuite_transaction_lines') }}
 ),
 transaction_lines_w_accounting_period as (
     -- transaction line totals, by accounts, accounting period, entity, and subsidiary
