@@ -1,0 +1,4 @@
+﻿department,employeestatus,employeetype,firstname,hiredate,id,isjobresource,issalesrep,laborcost,lastmodifieddate,lastname,location,releasedate,subsidiary,supervisor,title,workcalendar
+1,1,1,John,4/3/2017,1,TRUE,FALSE,100,2/24/2023 9:40,Smith,,,1,,Project Manager,1
+1,1,1,Jane,10/8/2018,2,TRUE,FALSE,90,2/28/2023 1:01,Doe,,10/1/2020,1,,Engineer,1
+1,1,1,Jim,5/1/2017,3,TRUE,FALSE,75,2/24/2023 9:39,Johnson,,,1,,Analyst,1

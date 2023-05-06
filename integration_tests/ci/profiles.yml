@@ -1,0 +1,54 @@
+
+# HEY! This file is used in the dbt package integrations tests with Buildkite.
+# You should __NEVER__ check credentials into version control. Thanks for reading :)
+
+config:
+    send_anonymous_usage_stats: False
+    use_colors: True
+
+integration_tests:
+  target: databricks
+  outputs:
+    databricks:
+      catalog: "{{ env_var('DATABRICKS_CATALOG') }}"
+      host: "{{ env_var('DATABRICKS_HOST') }}"
+      http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+      schema: netsuite_integration_tests_1
+      threads: 8
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      type: databricks
+    postgres:
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST') }}"
+      user: "{{ env_var('POSTGRES_USER') }}"
+      pass: "{{ env_var('POSTGRES_PASSWORD') }}"
+      dbname: "{{ env_var('POSTGRES_DATABASE') }}"
+      port: 5432
+      schema: netsuite_integration_tests_1
+      threads: 8
+    # redshift:
+    #   type: redshift
+    #   host: "{{ env_var('REDSHIFT_HOST') }}"
+    #   user: "{{ env_var('REDSHIFT_USER') }}"
+    #   pass: "{{ env_var('REDSHIFT_PASSWORD') }}"
+    #   dbname: "{{ env_var('REDSHIFT_DATABASE') }}"
+    #   port: 5439
+    #   schema: netsuite_integration_tests_1
+    #   threads: 8
+    # bigquery:
+    #   type: bigquery
+    #   method: service-account-json
+    #   project: 'dbt-package-testing'
+    #   schema: netsuite_integration_tests_1
+    #   threads: 8
+    #   keyfile_json: "{{ env_var('GCLOUD_SERVICE_KEY') | as_native }}"
+    # snowflake:
+    #   type: snowflake
+    #   account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+    #   user: "{{ env_var('SNOWFLAKE_USER') }}"
+    #   password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+    #   role: "{{ env_var('SNOWFLAKE_ROLE') }}"
+    #   database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
+    #   warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
+    #   schema: netsuite_integration_tests_1
+    #   threads: 8

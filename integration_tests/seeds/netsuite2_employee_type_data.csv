@@ -1,0 +1,14 @@
+﻿category,id,isinactive,name
+1,7,T,Full-Time
+1,8,T,Part-Time
+2,9,T,Temporary
+2,10,T,Seasonal
+2,11,T,Casual
+3,12,T,Consultant
+4,13,T,Volunteer
+4,14,T,System Bot
+1,15,F,Full-Time Non-Exempt
+3,16,F,Contractor Non-Exempt
+1,17,F,Temp/Intern Non-Exempt
+1,18,F,Temp/Intern Exempt
+3,19,F,Part-Time Non-Exempt
