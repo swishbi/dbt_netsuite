@@ -1,0 +1,51 @@
+﻿fullname,id,name,trantype
+Transfer Order : Pending Approval,A,Pending Approval,TrnfrOrd
+Vendor Return Authorization : Pending Approval,A,Pending Approval,VendAuth
+Revenue Arrangement : Pending Approval,A,Pending Approval,RevArrng
+Customer Deposit : Not Deposited,A,Not Deposited,CustDep
+Transfer Order : Pending Fulfillment,B,Pending Fulfillment,TrnfrOrd
+Bill : Paid In Full,B,Paid In Full,VendBill
+Bill Payment : In-Transit,B,In-Transit,VendPymt
+Store Pickup Fulfillment : Picked Up,B,Picked Up,StPickUp
+Credit Memo : Fully Applied,B,Fully Applied,CustCred
+Netting Settlement : Approved,B,Approved,NettStlm
+Statement Charge : Paid In Full,B,Paid In Full,CustChrg
+Return Authorization : Pending Receipt,B,Pending Receipt,RtnAuth
+Work Order : Cancelled,C,Cancelled,WorkOrd
+Requisition : Cancelled,C,Cancelled,PurchReq
+Sales Order : Cancelled,C,Cancelled,SalesOrd
+Customer Deposit : Fully Applied,C,Fully Applied,CustDep
+Purchase Order : Partially Received,D,Partially Received,PurchOrd
+Bill Payment : Rejected,D,Rejected,VendPymt
+Customer Payment Authorization : Potential Fraud,D,Potential Fraud,CustAuth
+Vendor Return Authorization : Partially Returned,D,Partially Returned,VendAuth
+Vendor Return Authorization : Pending Credit/Partially Returned,E,Pending Credit/Partially Returned,VendAuth
+Vendor Request For Quote : Partially Awarded,F,Partially Awarded,VendRfq
+Purchase Order : Pending Bill,F,Pending Bill,PurchOrd
+Transfer Order : Pending Receipt,F,Pending Receipt,TrnfrOrd
+Vendor Return Authorization : Pending Credit,F,Pending Credit,VendAuth
+Work Order : Built,G,Built,WorkOrd
+Revenue Arrangement : Closed,H,Closed,RevArrng
+Vendor Return Authorization : Closed,H,Closed,VendAuth
+Expense Report : Rejected (Overridden) by Accounting,H,Rejected (Overridden) by Accounting,ExpRept
+Expense Report : Paid In Full,I,Paid In Full,ExpRept
+Deprecated Custom Transaction : Status J,J,Status J,DeprCust
+Expense Report : Payment In Transit,J,Payment In Transit,ExpRept
+Customer Payment Authorization : Captured,K,Captured,CustAuth
+Deprecated Custom Transaction : Status L,L,Status L,DeprCust
+Deprecated Custom Transaction : Status O,O,Status O,DeprCust
+Commission : Pending Accounting Approval,P,Pending Accounting Approval,Commissn
+Revenue Arrangement : Rejected,R,Rejected,RevArrng
+Fulfillment Request : Rejected,R,Rejected,FftReq
+Check : Voided,V,Voided,Check
+Vendor Prepayment : Voided,V,Voided,VPrep
+Deprecated Custom Transaction : Status W,W,Status W,DeprCust
+Cash Refund : Undefined,Y,Undefined,CashRfnd
+Payment : Undefined,Y,Undefined,CustPymt
+Transfer : Undefined,Y,Undefined,Transfer
+Assembly Unbuild : Undefined,Y,Undefined,Unbuild
+Paycheck Journal : Undefined,Y,Undefined,PChkJrnl
+Inventory Adjustment : Undefined,Y,Undefined,InvAdjst
+Tax Liability Cheque : Undefined,Y,Undefined,TaxLiab
+Check : Undefined,Y,Undefined,Check
+Bill Payment : Online Bill Pay Pending Accounting Approval,Z,Online Bill Pay Pending Accounting Approval,VendPymt

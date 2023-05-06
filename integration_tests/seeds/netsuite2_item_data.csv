@@ -1,0 +1,4 @@
+_fivetran_synced,id,fullname,itemtype,description,department,class,location,subsidiary,assetaccount,expenseaccount,gainlossaccount,incomeaccount,deferralaccount,parent,deferredrevenueaccount,intercoexpenseaccount,intercoincomeaccount,isfulfillable,lastmodifieddate
+5/27/2022 13:00,640,This,Payment,Deposit,,11,,3,,,,6,,,,,,F,5/27/2022 13:00
+5/27/2022 13:00,976,That,Subtotal,Sub-Total,,,,3,,,,,,,,,,F,5/27/2022 13:00
+5/27/2022 13:00,628,Those,DwnLdItem,How To Optimize Performance Guide,,,,3,,,,55,,,,,,F,5/27/2022 13:00

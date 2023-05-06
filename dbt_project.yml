@@ -1,38 +1,97 @@
-
-# Name your project! Project names should contain only lowercase characters
-# and underscores. A good package name should reflect your organization's
-# name or the intended use of these models
-name: 'dbt_netsuite'
-version: '1.0.0'
 config-version: 2
+name: 'netsuite'
+version: '0.1.0'
+require-dbt-version: [">=1.3.0", "<2.0.0"]
 
-# This setting configures which "profile" dbt uses for this project.
-profile: 'dbt_netsuite'
-
-# These configurations specify where dbt should look for different types of files.
-# The `model-paths` config, for example, states that models in this project can be
-# found in the "models/" directory. You probably won't need to change these!
-model-paths: ["models"]
-analysis-paths: ["analyses"]
-test-paths: ["tests"]
-seed-paths: ["seeds"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
-
-target-path: "target"  # directory which will store compiled SQL files
-clean-targets:         # directories to be removed by `dbt clean`
-  - "target"
-  - "dbt_packages"
-
-
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-# In this example config, we tell dbt to build all models in the example/
-# directory as views. These settings can be overridden in the individual model
-# files using the `{{ config(...) }}` macro.
 models:
-  dbt_netsuite:
-    # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+  netsuite:
+    +materialized: table
+    +schema: netsuite
+    intermediate:
+      +materialized: ephemeral
+
+vars:
+  netsuite:
+    netsuite_account_types: "{{ ref('stg_netsuite__account_types') }}"
+    netsuite_accounting_book_subsidiaries: "{{ ref('stg_netsuite__accounting_book_subsidiaries') }}"
+    netsuite_accounting_books: "{{ ref('stg_netsuite__accounting_books') }}"
+    netsuite_accounting_period_fiscal_calendars: "{{ ref('stg_netsuite__accounting_period_fiscal_calendars') }}"
+    netsuite_accounting_periods: "{{ ref('base_netsuite__accounting_periods') }}"
+    netsuite_accounts: "{{ ref('base_netsuite__accounts') }}"
+    netsuite_billing_revenue_events: "{{ ref('stg_netsuite__billing_revenue_events') }}"
+    netsuite_billing_schedule_milestones: "{{ ref('stg_netsuite__billing_schedule_milestones') }}"
+    netsuite_billing_schedule_recurrences: "{{ ref('stg_netsuite__billing_schedule_recurrences') }}"
+    netsuite_billing_schedule_types: "{{ ref('stg_netsuite__billing_schedule_types') }}"
+    netsuite_billing_schedules: "{{ ref('stg_netsuite__billing_schedules') }}"
+    netsuite_budget_categories: "{{ ref('stg_netsuite__budget_categories') }}"
+    netsuite_budgets_machine: "{{ ref('stg_netsuite__budgets_machine') }}"
+    netsuite_budgets: "{{ ref('base_netsuite__budgets') }}"
+    netsuite_classes: "{{ ref('stg_netsuite__classes') }}"
+    netsuite_consolidated_exchange_rates: "{{ ref('base_netsuite__consolidated_exchange_rates') }}"
+    netsuite_currencies: "{{ ref('stg_netsuite__currencies') }}"
+    netsuite_customer_address_book_entity_address: "{{ ref('stg_netsuite__customer_address_book_entity_address') }}"
+    netsuite_customer_address_books: "{{ ref('stg_netsuite__customer_address_books') }}"
+    netsuite_customers: "{{ ref('base_netsuite__customers') }}"
+    netsuite_deleted_records: "{{ ref('stg_netsuite__deleted_records') }}"
+    netsuite_departments: "{{ ref('stg_netsuite__departments') }}"
+    netsuite_employee_status_categories: "{{ ref('stg_netsuite__employee_status_categories') }}"
+    netsuite_employee_statuses: "{{ ref('stg_netsuite__employee_statuses') }}"
+    netsuite_employee_type_categories: "{{ ref('stg_netsuite__employee_type_categories') }}"
+    netsuite_employee_types: "{{ ref('stg_netsuite__employee_types') }}"
+    netsuite_employees: "{{ ref('base_netsuite__employees') }}"
+    netsuite_entities: "{{ ref('base_netsuite__entities') }}"
+    netsuite_entity_address: "{{ ref('stg_netsuite__entity_address') }}"
+    netsuite_item_subtypes: "{{ ref('stg_netsuite__item_subtypes') }}"
+    netsuite_item_types: "{{ ref('stg_netsuite__item_types') }}"
+    netsuite_items: "{{ ref('base_netsuite__items') }}"
+    netsuite_job_resources: "{{ ref('stg_netsuite__job_resources') }}"
+    netsuite_job_statuses: "{{ ref('stg_netsuite__job_statuses') }}"
+    netsuite_job_types: "{{ ref('stg_netsuite__job_types') }}"
+    netsuite_jobs: "{{ ref('base_netsuite__jobs') }}"
+    netsuite_location_main_address: "{{ ref('stg_netsuite__location_main_address') }}"
+    netsuite_locations: "{{ ref('base_netsuite__locations') }}"
+    netsuite_next_transaction_line_links: "{{ ref('stg_netsuite__next_transaction_line_links') }}"
+    netsuite_previous_transaction_line_links: "{{ ref('stg_netsuite__previous_transaction_line_links') }}"
+    netsuite_project_task_assignees: "{{ ref('stg_netsuite__project_task_assignees') }}"
+    netsuite_project_tasks: "{{ ref('stg_netsuite__project_tasks') }}"
+    netsuite_revenue_elements: "{{ ref('stg_netsuite__revenue_elements') }}"
+    netsuite_revenue_plan_planned_costs: "{{ ref('stg_netsuite__revenue_plan_planned_costs') }}"
+    netsuite_revenue_plan_planned_revenue: "{{ ref('stg_netsuite__revenue_plan_planned_revenue') }}"
+    netsuite_revenue_plan_statuses: "{{ ref('stg_netsuite__revenue_plan_statuses') }}"
+    netsuite_revenue_plan_types: "{{ ref('stg_netsuite__revenue_plan_types') }}"
+    netsuite_revenue_plans: "{{ ref('base_netsuite__revenue_plans') }}"
+    netsuite_subsidiaries: "{{ ref('stg_netsuite__subsidiaries') }}"
+    netsuite_time_entries: "{{ ref('stg_netsuite__time_entries') }}"
+    netsuite_time_off_types: "{{ ref('stg_netsuite__time_off_types') }}"
+    netsuite_transaction_accounting_lines: "{{ ref('stg_netsuite__transaction_accounting_lines') }}"
+    netsuite_transaction_lines: "{{ ref('base_netsuite__transaction_lines') }}"
+    netsuite_transaction_sales_teams: "{{ ref('stg_netsuite__transaction_sales_teams') }}"
+    netsuite_transaction_statuses: "{{ ref('stg_netsuite__transaction_statuses') }}"
+    netsuite_transactions: "{{ ref('base_netsuite__transactions') }}"
+    netsuite_vendor_categories: "{{ ref('stg_netsuite__vendor_categories') }}"
+    netsuite_vendors: "{{ ref('base_netsuite__vendors') }}"
+    netsuite_work_calendar_holidays: "{{ ref('stg_netsuite__work_calendar_holidays') }}"
+    netsuite_work_calendars: "{{ ref('stg_netsuite__work_calendars') }}"
+    accounts_pass_through_columns: []
+    classes_pass_through_columns: []
+    consolidated_exchange_rates_pass_through_columns: []
+    customers_pass_through_columns: []
+    departments_pass_through_columns: []
+    employees_pass_through_columns: []
+    entities_pass_through_columns: []
+    items_pass_through_columns: []
+    jobs_pass_through_columns: []
+    locations_pass_through_columns: []
+    project_tasks_pass_through_columns: []
+    subsidiaries_pass_through_columns: []
+    time_entries_pass_through_columns: []
+    transactions_pass_through_columns: []
+    transaction_lines_pass_through_columns: []
+    vendors_pass_through_columns: []
+    balance_sheet_transaction_detail_columns: []
+    income_statement_transaction_detail_columns: []
+
+clean-targets:
+- target
+- dbt_modules
+- dbt_packages

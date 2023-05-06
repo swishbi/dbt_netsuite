@@ -1,0 +1,21 @@
+﻿id,internalid,name,sequence
+InvtPart,1,Inventory Item,1
+NonInvtPart,2,Non-inventory Item,2
+Service,3,Service,3
+OthCharge,4,Other Charge,4
+Assembly,5,Assembly/Bill of Materials,5
+Kit,6,Kit/Package,6
+Group,7,Item Group,7
+Discount,8,Discount,8
+Markup,9,Markup,9
+Subtotal,10,Subtotal,10
+Description,11,Description,11
+Payment,12,Payment,12
+TaxItem,13,Sales Tax Item,13
+TaxGroup,14,Sales Tax Group,14
+ShipItem,15,Shipping Cost Item,15
+EndGroup,16,End of Item Group,999
+DwnLdItem,17,Download Item,17
+GiftCert,18,Gift Certificate,18
+Expense,19,Expense,19
+SubscriPlan,20,Subscription Plan,20
