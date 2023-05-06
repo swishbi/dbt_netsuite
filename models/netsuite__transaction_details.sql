@@ -265,8 +265,10 @@ transaction_details as (
     left join vendors
         on vendors.vendor_id = coalesce(transaction_lines.entity_id, transactions.entity_id)
     
+    {% if var('netsuite__multiple_currencies_enabled', false) %}
     left join currencies 
         on currencies.currency_id = transactions.currency_id
+    {% endif %}
     
     left join departments 
         on departments.department_id = transaction_lines.department_id
