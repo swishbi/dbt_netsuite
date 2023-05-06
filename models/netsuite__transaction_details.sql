@@ -81,7 +81,7 @@ transaction_details as (
         transactions.transaction_number
 
         --The below script allows for transaction line table pass through columns.
-        {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='transaction_lines_pass_through_columns', identifier='transaction_lines', transform='') }},
+        {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='transaction_lines_pass_through_columns', identifier='transaction_lines', transform='') }}
 
         --The below script allows for transaction table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='transactions_pass_through_columns', identifier='transactions', transform='') }},
