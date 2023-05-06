@@ -239,10 +239,13 @@ transaction_details as (
     {% if var('netsuite__using_jobs', false) %}
     left join jobs
         on jobs.job_id = coalesce(transaction_lines.entity_id, transactions.entity_id)
-    {% endif %}
 
     left join customers
         on customers.customer_id = coalesce(jobs.customer_id, transaction_lines.entity_id, transactions.entity_id)
+    {% else %}
+    left join customers
+        on customers.customer_id = coalesce(transaction_lines.entity_id, transactions.entity_id)
+    {% endif %}
     
     left join items 
         on items.item_id = transaction_lines.item_id
