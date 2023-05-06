@@ -162,9 +162,11 @@ transaction_details as (
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='locations_pass_through_columns', identifier='locations', transform='') }},
         
         coalesce(transaction_lines.entity_id, transactions.entity_id) as vendor_id,
-        vendors.vendor_category_name,
         vendors.vendor_name,
         vendors.vendor_create_date
+        {% if var('netsuite__using_vendor_categories', false) %}
+        ,vendors.vendor_category_name
+        {% endif %}
         
         --The below script allows for vendors table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='vendors_pass_through_columns', identifier='vendors', transform='') }},
