@@ -97,7 +97,7 @@ transaction_details as (
         accounts.account_name,
         accounts.account_type_name,
         accounts.account_number,
-        accounts.account_number_and_name
+        accounts.account_number_and_name,
         accounts.is_leftside as is_account_leftside,
         accounts.is_accounts_payable,
         accounts.is_accounts_receivable,
