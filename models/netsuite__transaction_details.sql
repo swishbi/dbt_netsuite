@@ -76,7 +76,6 @@ transaction_details as (
         transactions.transaction_date,
         transactions.transaction_due_date,
         transactions.transaction_type,
-        transactions.is_transaction_intercompany_adjustment,
         transactions.transaction_name,
         transactions.transaction_number
 
