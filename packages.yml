@@ -1,3 +1,6 @@
 packages:
+  # Use this version when the repository is set to public.
+  # - git: "https://github.com/swishbi/dbt_netsuite_source.git" # git HTTPS URL
+  #   revision: v0.2.0
   - git: "https://{{env_var('DBT_ENV_SECRET_GIT_CREDENTIAL')}}@github.com/swishbi/dbt_netsuite_source.git" # git HTTPS URL
-    revision: main
+    revision: v0.2.0
