@@ -69,12 +69,12 @@ balance_sheet as (
         end as account_type_name,
 
         case
-            when not accounts.is_balancesheet then null
+            when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_account_id", null) }}
             else accounts.account_id
         end as account_id,
 
         case
-            when not accounts.is_balancesheet then null
+            when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_account_number", null) }}
             else accounts.account_number
         end as account_number
 
@@ -108,7 +108,7 @@ balance_sheet as (
                 and reporting_accounting_periods.fiscal_calendar_id = transaction_accounting_periods.fiscal_calendar_id
                 {% endif %}
             ) then 15
-            when not accounts.is_balancesheet then 14
+            when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_sort_helper", 14) }}
             else null
         end as balance_sheet_sort_helper
 
