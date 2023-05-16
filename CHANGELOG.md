@@ -1,3 +1,11 @@
+# dbt_netsuite v0.2.2
+
+## Bug Fixes 🐞
+Update balance sheet query to allow variable definitions to appropriately allocate retained earnings.
+
+## Contributors
+- [phillem15](https://github.com/phillem15) ([#6](https://github.com/swishbi/dbt_netsuite/pull/6))
+
 # dbt_netsuite v0.2.1
 
 ## 🎉 Feature Updates 🎉
