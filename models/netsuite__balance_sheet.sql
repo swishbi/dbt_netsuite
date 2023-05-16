@@ -69,12 +69,12 @@ balance_sheet as (
         end as account_type_name,
 
         case
-            when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_account_id", null) }}
+            when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_account_id", "null") }}
             else accounts.account_id
         end as account_id,
 
         case
-            when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_account_number", null) }}
+            when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_account_number", "null") }}
             else accounts.account_number
         end as account_number
 
