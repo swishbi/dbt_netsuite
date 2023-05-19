@@ -1,3 +1,11 @@
+# dbt_netsuite v0.2.3
+
+## 🎉 Feature Updates 🎉
+Update package reference to no longer require a GitHub personal access token as an environment variable.
+
+## Contributors
+- [phillem15](https://github.com/phillem15) ([#7](https://github.com/swishbi/dbt_netsuite/pull/7))
+
 # dbt_netsuite v0.2.2
 
 ## Bug Fixes 🐞
