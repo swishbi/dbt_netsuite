@@ -41,7 +41,7 @@ balance_sheet as (
                 {% if var('netsuite__multiple_calendars_enabled', false) %}
                 and reporting_accounting_periods.fiscal_calendar_id = transaction_accounting_periods.fiscal_calendar_id
                 {% endif %}
-            ) then 'Net Income'
+            ) then {{ var("balance_sheet_retained_earnings_account_name", "'Net Income'") }}
             when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_account_name", "'Retained Earnings'") }}
             else accounts.account_name
         end as account_name,
@@ -52,7 +52,7 @@ balance_sheet as (
                 {% if var('netsuite__multiple_calendars_enabled', false) %}
                 and reporting_accounting_periods.fiscal_calendar_id = transaction_accounting_periods.fiscal_calendar_id
                 {% endif %}
-            ) then 'Net Income'
+            ) then {{ var("balance_sheet_retained_earnings_account_number_and_name", "'Net Income'") }}
             when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_account_number_and_name", "'Retained Earnings'") }}
             else accounts.account_number_and_name
         end as account_number_and_name,
@@ -63,7 +63,7 @@ balance_sheet as (
                 {% if var('netsuite__multiple_calendars_enabled', false) %}
                 and reporting_accounting_periods.fiscal_calendar_id = transaction_accounting_periods.fiscal_calendar_id
                 {% endif %}
-            ) then 'Net Income'
+            ) then {{ var("balance_sheet_retained_earnings_account_type", "'Net Income'") }}
             when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_account_type", "'Retained Earnings'") }}
             else accounts.account_type_name
         end as account_type_name,
@@ -107,7 +107,7 @@ balance_sheet as (
                 {% if var('netsuite__multiple_calendars_enabled', false) %}
                 and reporting_accounting_periods.fiscal_calendar_id = transaction_accounting_periods.fiscal_calendar_id
                 {% endif %}
-            ) then 15
+            ) then {{ var("balance_sheet_retained_earnings_sort_helper", 15) }}
             when not accounts.is_balancesheet then {{ var("balance_sheet_retained_earnings_sort_helper", 14) }}
             else null
         end as balance_sheet_sort_helper

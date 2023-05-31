@@ -1,3 +1,11 @@
+# dbt_netsuite v0.2.4
+
+## 🎉 Feature Updates 🎉
+Update balance sheet query to allow Net Income to fold into Retained Earnings using the balance sheet retained earnings variables.
+
+## Contributors
+- [phillem15](https://github.com/phillem15) ([#8](https://github.com/swishbi/dbt_netsuite/pull/8))
+
 # dbt_netsuite v0.2.3
 
 ## 🎉 Feature Updates 🎉
