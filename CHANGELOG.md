@@ -1,3 +1,11 @@
+# dbt_netsuite v0.2.5
+
+## Bug Fixes 🐞
+Update int_netsuite__tran_and_reporting_periods query to remove adjustment periods from the multiplier periods. This was causing the adjustment periods in the balance sheet to be overinflated.
+
+## Contributors
+- [phillem15](https://github.com/phillem15) ([#9](https://github.com/swishbi/dbt_netsuite/pull/9))
+
 # dbt_netsuite v0.2.4
 
 ## 🎉 Feature Updates 🎉
