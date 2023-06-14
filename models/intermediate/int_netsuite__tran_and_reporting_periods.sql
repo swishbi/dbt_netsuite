@@ -23,7 +23,8 @@ transaction_and_reporting_periods as (
     where 
         not base.is_quarter
         and not base.is_year
-        and not multiplier.is_adjustment
+        and (not multiplier.is_adjustment -- adjustment periods should not be included in muliplier
+            or base.accounting_period_id = multiplier.accounting_period_id) -- adjustment periods should not carry into future adjustment periods
         {% if var('netsuite__multiple_calendars_enabled', false) %}
         and base.fiscal_calendar_id = (select fiscal_calendar_id from subsidiaries where parent_id is null) -- fiscal calendar will align with parent subsidiary's default calendar
         {% endif %}
