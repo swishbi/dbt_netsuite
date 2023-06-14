@@ -1,3 +1,11 @@
+# dbt_netsuite v0.2.6
+
+## Bug Fixes 🐞
+Update int_netsuite__tran_and_reporting_periods adjustment period logic so that adjustment periods are only included for the year they are adjusting. They should not carry forward into future years.
+
+## Contributors
+- [phillem15](https://github.com/phillem15) ([#10](https://github.com/swishbi/dbt_netsuite/pull/10))
+
 # dbt_netsuite v0.2.5
 
 ## Bug Fixes 🐞
