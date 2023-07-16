@@ -123,6 +123,9 @@ transaction_details as (
         customers.customer_zip_code,
         customers.customer_country,
         customers.customer_external_id
+        {% if var('netsuite__using_customer_categories', false) %}
+        ,customers.customer_category_name
+        {% endif %}
 
         --The below script allows for customers table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='customers_pass_through_columns', identifier='customers', transform='') }},
