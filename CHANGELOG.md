@@ -1,3 +1,11 @@
+# dbt_netsuite v0.2.7
+
+## 🎉 Feature Updates 🎉
+Incorporate customer categories into `netsuite__transaction_details` via the `netsuite__using_customer_categories` variable from `dbt_netsuite_source`.
+
+## Contributors
+- [phillem15](https://github.com/phillem15) ([#11](https://github.com/swishbi/dbt_netsuite/pull/11))
+
 # dbt_netsuite v0.2.6
 
 ## Bug Fixes 🐞
