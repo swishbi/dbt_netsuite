@@ -1,3 +1,11 @@
+# dbt_netsuite v0.2.8
+
+## Bug Fixes 🐞
+Bump the version for the `dbt_netsuite_source` package to `v0.2.8`. This fixes a bug in the `netsuite__budget_datails` model where the default identifier for the budgets table should be `budgets` instead of `budget`.
+
+## Contributors
+- [phillem15](https://github.com/phillem15) ([#12](https://github.com/swishbi/dbt_netsuite/pull/12))
+
 # dbt_netsuite v0.2.7
 
 ## 🎉 Feature Updates 🎉
