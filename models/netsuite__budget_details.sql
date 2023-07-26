@@ -46,7 +46,11 @@ budget_details as (
     
     select
         budgets_with_converted_amounts.budget_id,
+
+        {% if var('netsuite__multiple_budgets_enabled', false) %}
         budgets_with_converted_amounts.budget_category,
+        {% endif %}
+
         budgets_with_converted_amounts.budget_accounting_period_id,
         accounting_periods.starting_at as accounting_period_starting,
         accounting_periods.ending_at as accounting_period_ending,
@@ -78,7 +82,6 @@ budget_details as (
         budgets_with_converted_amounts.item_id,
         items.item_name,
         items.item_type_name,
-        items.item_sales_description,
         budgets_with_converted_amounts.location_id,
         locations.location_name,
         locations.location_city,
