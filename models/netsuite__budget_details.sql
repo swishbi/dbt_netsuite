@@ -51,7 +51,7 @@ budget_details as (
         budgets_with_converted_amounts.budget_category,
         {% endif %}
 
-        budgets_with_converted_amounts.budget_accounting_period_id,
+        budgets_with_converted_amounts.accounting_period_id,
         accounting_periods.starting_at as accounting_period_starting,
         accounting_periods.ending_at as accounting_period_ending,
         accounting_periods.accounting_period_name,
@@ -67,6 +67,7 @@ budget_details as (
         accounts.is_accounts_receivable,
         accounts.is_account_intercompany,
         coalesce(parent_account.account_name, accounts.account_name) as parent_account_name,
+        coalesce(parent_account.account_number_and_name, accounts.account_number_and_name) as parent_account_number_and_name,
         accounts.is_expense_account, -- includes deferred expense
         accounts.is_income_account,
         budgets_with_converted_amounts.customer_id,
@@ -117,7 +118,7 @@ budget_details as (
         on parent_account.account_id = accounts.parent_id
     
     left join accounting_periods
-        on accounting_periods.accounting_period_id = budgets_with_converted_amounts.budget_accounting_period_id
+        on accounting_periods.accounting_period_id = budgets_with_converted_amounts.accounting_period_id
     
     left join customers 
         on customers.customer_id = budgets_with_converted_amounts.customer_id
