@@ -1,3 +1,11 @@
+# dbt_netsuite v0.2.9
+
+## Bug Fixes 🐞
+Incorporate the `netsuite__multiple_currencies_enabled` variable into the select statement and joins for the currency CTE. This was incorporated in some places but not all.
+
+## Contributors
+- [phillem15](https://github.com/phillem15) ([#13](https://github.com/swishbi/dbt_netsuite/pull/13))
+
 # dbt_netsuite v0.2.8
 
 ## Bug Fixes 🐞

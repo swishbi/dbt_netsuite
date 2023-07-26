@@ -46,8 +46,12 @@ budget_details as (
     
     select
         budgets_with_converted_amounts.budget_id,
+
+        {% if var('netsuite__multiple_budgets_enabled', false) %}
         budgets_with_converted_amounts.budget_category,
-        budgets_with_converted_amounts.budget_accounting_period_id,
+        {% endif %}
+
+        budgets_with_converted_amounts.accounting_period_id,
         accounting_periods.starting_at as accounting_period_starting,
         accounting_periods.ending_at as accounting_period_ending,
         accounting_periods.accounting_period_name,
@@ -63,6 +67,7 @@ budget_details as (
         accounts.is_accounts_receivable,
         accounts.is_account_intercompany,
         coalesce(parent_account.account_name, accounts.account_name) as parent_account_name,
+        coalesce(parent_account.account_number_and_name, accounts.account_number_and_name) as parent_account_number_and_name,
         accounts.is_expense_account, -- includes deferred expense
         accounts.is_income_account,
         budgets_with_converted_amounts.customer_id,
@@ -78,26 +83,29 @@ budget_details as (
         budgets_with_converted_amounts.item_id,
         items.item_name,
         items.item_type_name,
-        items.item_sales_description,
         budgets_with_converted_amounts.location_id,
         locations.location_name,
         locations.location_city,
         locations.location_country,
+
+        {% if var('netsuite__multiple_currencies_enabled', false) %}
         budgets_with_converted_amounts.currency_id,
         currencies.currency_name,
         currencies.currency_symbol,
+        {% endif %}
+
         budgets_with_converted_amounts.department_id,
         departments.department_name,
         budgets_with_converted_amounts.subsidiary_id,
         subsidiaries.subsidiary_name,
 
         case
-            when accounts.is_income_account then - converted_amount_using_budget_accounting_period
+            when not accounts.is_income_account then -converted_amount_using_budget_accounting_period
             else converted_amount_using_budget_accounting_period
         end as converted_amount,
 
         case
-            when accounts.is_income_account then - budgets_with_converted_amounts.unconverted_amount
+            when not accounts.is_income_account then -budgets_with_converted_amounts.unconverted_amount
             else budgets_with_converted_amounts.unconverted_amount
         end as unconverted_amount
 
@@ -110,7 +118,7 @@ budget_details as (
         on parent_account.account_id = accounts.parent_id
     
     left join accounting_periods
-        on accounting_periods.accounting_period_id = budgets_with_converted_amounts.budget_accounting_period_id
+        on accounting_periods.accounting_period_id = budgets_with_converted_amounts.accounting_period_id
     
     left join customers 
         on customers.customer_id = budgets_with_converted_amounts.customer_id
@@ -124,8 +132,10 @@ budget_details as (
     left join locations 
         on locations.location_id = budgets_with_converted_amounts.location_id
     
+    {% if var('netsuite__multiple_currencies_enabled', false) %}
     left join currencies 
         on currencies.currency_id = budgets_with_converted_amounts.currency_id
+    {% endif %}
     
     left join departments 
         on departments.department_id = budgets_with_converted_amounts.department_id

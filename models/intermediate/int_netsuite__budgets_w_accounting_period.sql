@@ -10,7 +10,7 @@ budgets_w_accounting_period as (
     
     select
         budgets.*,
-        budgets_machine.accounting_period_id as budget_accounting_period_id,
+        budgets_machine.accounting_period_id,
         coalesce(budgets_machine.amount, 0) as unconverted_amount
     
     from budgets
