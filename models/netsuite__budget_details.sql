@@ -83,21 +83,25 @@ budget_details as (
         locations.location_name,
         locations.location_city,
         locations.location_country,
+
+        {% if var('netsuite__multiple_currencies_enabled', false) %}
         budgets_with_converted_amounts.currency_id,
         currencies.currency_name,
         currencies.currency_symbol,
+        {% endif %}
+
         budgets_with_converted_amounts.department_id,
         departments.department_name,
         budgets_with_converted_amounts.subsidiary_id,
         subsidiaries.subsidiary_name,
 
         case
-            when accounts.is_income_account then - converted_amount_using_budget_accounting_period
+            when accounts.is_income_account then -converted_amount_using_budget_accounting_period
             else converted_amount_using_budget_accounting_period
         end as converted_amount,
 
         case
-            when accounts.is_income_account then - budgets_with_converted_amounts.unconverted_amount
+            when accounts.is_income_account then -budgets_with_converted_amounts.unconverted_amount
             else budgets_with_converted_amounts.unconverted_amount
         end as unconverted_amount
 
@@ -124,8 +128,10 @@ budget_details as (
     left join locations 
         on locations.location_id = budgets_with_converted_amounts.location_id
     
+    {% if var('netsuite__multiple_currencies_enabled', false) %}
     left join currencies 
         on currencies.currency_id = budgets_with_converted_amounts.currency_id
+    {% endif %}
     
     left join departments 
         on departments.department_id = budgets_with_converted_amounts.department_id
