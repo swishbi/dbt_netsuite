@@ -100,12 +100,12 @@ budget_details as (
         subsidiaries.subsidiary_name,
 
         case
-            when accounts.is_income_account then -converted_amount_using_budget_accounting_period
+            when not accounts.is_income_account then -converted_amount_using_budget_accounting_period
             else converted_amount_using_budget_accounting_period
         end as converted_amount,
 
         case
-            when accounts.is_income_account then -budgets_with_converted_amounts.unconverted_amount
+            when not accounts.is_income_account then -budgets_with_converted_amounts.unconverted_amount
             else budgets_with_converted_amounts.unconverted_amount
         end as unconverted_amount
 
