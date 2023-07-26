@@ -1,3 +1,3 @@
 packages:
   - git: "https://github.com/swishbi/dbt_netsuite_source.git" # git HTTPS URL
-    revision: v0.2.2
+    revision: v0.2.3
