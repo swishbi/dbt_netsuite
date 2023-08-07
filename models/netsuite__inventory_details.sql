@@ -24,7 +24,7 @@ inventory_transactions as (
         account_number,
         account_number_and_name,
         location_id,
-        location_name
+        location_name,
         item_id,
         item_name,
         rate_amount,
