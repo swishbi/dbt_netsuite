@@ -32,8 +32,8 @@ inventory_transactions as (
         converted_amount,
         transaction_amount,
 
-        sum(quantity) over (partition by item_id, location_id order by transaction_date, transaction_id, transaction_line_id) as inventory_quantity_balance,
-        sum(transaction_amount) over (partition by item_id, location_id order by transaction_date, transaction_id, transaction_line_id) as inventory_value_balance
+        sum(quantity) over (partition by item_id, location_id order by transaction_date, transaction_id, transaction_line_id range unbounded preceding) as inventory_quantity_balance,
+        sum(transaction_amount) over (partition by item_id, location_id order by transaction_date, transaction_id, transaction_line_id range unbounded preceding) as inventory_value_balance
 
         --Below is only used if income statement transaction detail columns are specified dbt_project.yml file.
         {% if var('inventory_transaction_detail_columns') %}
