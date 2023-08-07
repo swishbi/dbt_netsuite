@@ -42,7 +42,8 @@ inventory_transactions as (
 
     from transaction_details
     
-    where (is_inventory_affecting and not is_voided)
-            or (lower(accounting_line_type) = 'asset' and lower(transaction_memo) = 'cost of sales adjustment')
+    where lower(transaction_type) not in ('bintrnfr', 'binwksht')
+            and ((is_inventory_affecting and not is_voided)
+                or (lower(accounting_line_type) = 'asset' and lower(transaction_memo) = 'cost of sales adjustment'))
 )
 select * from inventory_transactions
