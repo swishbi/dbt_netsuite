@@ -1,6 +1,6 @@
 config-version: 2
 name: 'netsuite'
-version: '0.2.10'
+version: '0.3.0'
 require-dbt-version: [">=1.3.0", "<2.0.0"]
 
 models:
@@ -18,6 +18,7 @@ vars:
     netsuite_accounting_period_fiscal_calendars: "{{ ref('stg_netsuite__accounting_period_fiscal_calendars') }}"
     netsuite_accounting_periods: "{{ ref('base_netsuite__accounting_periods') }}"
     netsuite_accounts: "{{ ref('base_netsuite__accounts') }}"
+    netsuite_bins: "{{ ref('stg_netsuite__bins') }}"
     netsuite_billing_revenue_events: "{{ ref('stg_netsuite__billing_revenue_events') }}"
     netsuite_billing_schedule_milestones: "{{ ref('stg_netsuite__billing_schedule_milestones') }}"
     netsuite_billing_schedule_recurrences: "{{ ref('stg_netsuite__billing_schedule_recurrences') }}"
@@ -41,6 +42,7 @@ vars:
     netsuite_employees: "{{ ref('base_netsuite__employees') }}"
     netsuite_entities: "{{ ref('base_netsuite__entities') }}"
     netsuite_entity_address: "{{ ref('stg_netsuite__entity_address') }}"
+    netsuite_inventory_assignments: "{{ ref('stg_netsuite__inventory_assignments') }}"
     netsuite_item_subtypes: "{{ ref('stg_netsuite__item_subtypes') }}"
     netsuite_item_types: "{{ ref('stg_netsuite__item_types') }}"
     netsuite_items: "{{ ref('base_netsuite__items') }}"
@@ -90,6 +92,7 @@ vars:
     vendors_pass_through_columns: []
     balance_sheet_transaction_detail_columns: []
     income_statement_transaction_detail_columns: []
+    inventory_transaction_detail_columns: []
 
 clean-targets:
 - target

@@ -1,3 +1,15 @@
+# dbt_netsuite v0.3.0
+
+## 🚨 Breaking Changes 🚨:
+[PR #15](https://github.com/swishbi/dbt_netsuite/pull/15) includes the following breaking changes:
+- Update `dbt_netsuite_source` package to `v0.3.0`. This re-introduces the `quantity` and `rateamount` columns to the `stg_netsuite__transaction_lines` model. This also adds the `voided` column to the `stg_netsuite__transactions` model. If these columns were added via the pass through columns, they need to be removed from the pass through variable or aliased using the `transform_sql` modifier.
+
+## 🎉 Feature Updates 🎉
+- Added a new model `netsuite__inventory_details` for the purposes of creating the inventory balance history. This can be enabled using the `netsuite__inventory_management_enabled` variable.
+
+## Contributors
+- [phillem15](https://github.com/phillem15) ([#15](https://github.com/swishbi/dbt_netsuite/pull/15))
+
 # dbt_netsuite v0.2.10
 
 ## 🚨 Breaking Changes 🚨:

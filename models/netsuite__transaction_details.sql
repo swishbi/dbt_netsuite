@@ -77,7 +77,14 @@ transaction_details as (
         transactions.transaction_due_date,
         transactions.transaction_type,
         transactions.transaction_name,
-        transactions.transaction_number
+        transactions.transaction_number,
+        transaction_lines.rate_amount,
+        transaction_lines.quantity,
+        transactions.is_voided
+        {% if var('netsuite__inventory_management_enabled', false) %}
+        ,transaction_lines.is_inventory_affecting
+        ,transaction_lines.accounting_line_type
+        {% endif %}
 
         --The below script allows for transaction line table pass through columns.
         {{ fivetran_utils.persist_pass_through_columns(pass_through_variable='transaction_lines_pass_through_columns', identifier='transaction_lines', transform='') }}
