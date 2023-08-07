@@ -26,10 +26,11 @@ inventory_transactions as (
         location_id,
         location_name
         item_id,
-        item_name
+        item_name,
+        rate_amount,
+        quantity,
         converted_amount,
         transaction_amount,
-        quantity,
 
         sum(quantity) over (partition by item_id, location_id order by transaction_date, transaction_id, transaction_line_id) as inventory_quantity_balance,
         sum(transaction_amount) over (partition by item_id, location_id order by transaction_date, transaction_id, transaction_line_id) as inventory_value_balance

@@ -77,9 +77,11 @@ transaction_details as (
         transactions.transaction_due_date,
         transactions.transaction_type,
         transactions.transaction_name,
-        transactions.transaction_number
+        transactions.transaction_number,
+        transaction_lines.rate_amount,
+        transaction_lines.quantity,
+        transactions.is_voided
         {% if var('netsuite__inventory_management_enabled', false) %}
-        ,transactions.is_voided
         ,transaction_lines.is_inventory_affecting
         ,transaction_lines.accounting_line_type
         {% endif %}
