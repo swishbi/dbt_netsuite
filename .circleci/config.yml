@@ -87,13 +87,13 @@ workflows:
     jobs:
       - hold:
           type: approval
-      - integration-tests:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              ignore: /.*/
-            pull_requests:
-              only: /.*/
-          requires:
-            - hold
+      - name: integration-tests
+        filters:
+          branches:
+            ignore: /.*/
+          tags:
+            ignore: /.*/
+          pull_requests:
+            only: /.*/
+        requires:
+          - hold
