@@ -90,3 +90,6 @@ workflows:
       - integration-tests:
           requires:
             - hold
+          filters:
+            branches:
+              ignore: main
