@@ -169,7 +169,7 @@ time_entry_details as (
         on jobs.job_id = time_entries.customer_id
         
     left join customers 
-        on customers.customer_id = coalesce(time_entries.customer_id, jobs.customer_id)
+        on customers.customer_id = coalesce(jobs.customer_id, time_entries.customer_id)
     {% else %}
     left join customers 
         on customers.customer_id = time_entries.customer_id
