@@ -86,10 +86,10 @@ workflows:
   test-all:
     jobs:
       - name: integration-tests
-        filters:
-          branches:
-            ignore: /.*/
-          tags:
-            ignore: /.*/
-          pull_requests:
-            only: /.*/
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              ignore: /.*/
+            pull_requests:
+              only: /.*/
