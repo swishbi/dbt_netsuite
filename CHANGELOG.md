@@ -1,3 +1,11 @@
+# dbt_netsuite v0.3.1
+
+## Bug Fixes 🐞
+- Update the `netsuite__time_entry_details` model to correctly account for features enabled in the `dbt_netsuite_source` package. Previously, the model would fail if any of the following variables were not defined or set to `false`: `netsuite__using_jobs`, `netsuite__advanced_jobs_enabled`, `netsuite__time_off_management_enabled`.
+
+## Contributors
+- [phillem15](https://github.com/phillem15) ([#16](https://github.com/swishbi/dbt_netsuite/pull/16))
+
 # dbt_netsuite v0.3.0
 
 ## 🚨 Breaking Changes 🚨:
