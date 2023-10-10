@@ -85,8 +85,6 @@ workflows:
   version: 2
   test-all:
     jobs:
-      - hold:
-          type: approval
       - name: integration-tests
         filters:
           branches:
@@ -95,5 +93,3 @@ workflows:
             ignore: /.*/
           pull_requests:
             only: /.*/
-        requires:
-          - hold
