@@ -1,3 +1,11 @@
+# dbt_netsuite v0.3.2
+
+## 🚨 Breaking Changes 🚨:
+- Bump the version for `dbt_netsuite_source` package.
+
+## Contributors
+- [phillem15](https://github.com/phillem15)
+
 # dbt_netsuite v0.3.1
 
 ## Bug Fixes 🐞
